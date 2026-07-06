@@ -40,6 +40,9 @@ export default function SiteHeader() {
             <Link href="/how-it-works" className="nav-link text-white hover:text-amber">How It Works</Link>
             <Link href="/about" className="nav-link text-white hover:text-amber">About</Link>
           </nav>
+          <Link href="/login" className="nav-link text-white hover:text-amber">
+            Sign In
+          </Link>
           <Link href="/ramps" className="btn-amber text-xs">Rent a Ramp</Link>
         </div>
       </header>
