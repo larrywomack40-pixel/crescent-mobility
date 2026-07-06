@@ -15,24 +15,25 @@ async function getFeaturedRamps() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy-dark">
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-light/40 via-navy to-navy-dark" />
-      <div className="container-x relative grid gap-10 py-24 md:grid-cols-2 md:items-center md:py-32">
-        <div>
-          <p className="mb-4 font-display text-sm uppercase tracking-[0.3em] text-gold">Ramp Rentals, Made Simple</p>
-          <h1 className="font-display text-5xl font-bold uppercase leading-tight text-cream md:text-6xl">
-            Access that's<br /><span className="text-gold">built to endure</span>
+    <section className="relative flex min-h-screen items-center overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80)' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/30" />
+      <div className="container-x relative z-10 pt-28">
+        <div className="max-w-2xl">
+          <p className="overline text-2xl text-white">Ramp Rentals, Made Simple</p>
+          <h1 className="mt-6 text-5xl font-semibold uppercase leading-[1.05] tracking-wide text-white md:text-7xl">
+            Access that&rsquo;s built to endure
           </h1>
-          <p className="mt-6 max-w-md text-lg text-cream/70">
+          <p className="mt-6 max-w-md text-lg text-white/75">
             Sturdy, ready-to-roll ramps delivered and set up at your door. Rent by the day, week, or month.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/ramps" className="btn-gold">Browse Ramps</Link>
-            <Link href="/how-it-works" className="btn-outline">How It Works</Link>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link href="/ramps" className="btn-amber">Browse Ramps</Link>
+            <Link href="/how-it-works" className="btn-outline text-white hover:text-charcoal">How It Works</Link>
           </div>
-        </div>
-        <div className="relative">
-          <div className="aspect-[4/3] w-full rounded-2xl border border-white/10 bg-gradient-to-tr from-navy-light to-navy shadow-2xl" />
         </div>
       </div>
     </section>
@@ -46,12 +47,13 @@ function ValueProps() {
     { title: 'Rated & Reliable', body: 'Every ramp is inspected and rated for safe weight capacity.' }
   ];
   return (
-    <section className="border-y border-white/10 bg-navy">
-      <div className="container-x grid gap-8 py-16 md:grid-cols-3">
+    <section className="bg-charcoal">
+      <div className="container-x grid gap-8 py-20 md:grid-cols-3">
         {items.map((it) => (
-          <div key={it.title} className="rounded-xl border border-white/5 bg-navy-light/40 p-8">
-            <h3 className="font-display text-xl uppercase tracking-wide text-gold">{it.title}</h3>
-            <p className="mt-3 text-cream/70">{it.body}</p>
+          <div key={it.title} className="rounded-2xl border border-white/10 bg-charcoal-light p-8">
+            <div className="mb-5 h-1 w-12 bg-amber" />
+            <h3 className="text-xl font-semibold uppercase tracking-wide text-white">{it.title}</h3>
+            <p className="mt-3 text-white/60">{it.body}</p>
           </div>
         ))}
       </div>
@@ -59,22 +61,47 @@ function ValueProps() {
   );
 }
 
+function Marquee() {
+  const items = ['Delivered', 'Elegant', 'Built to endure', 'Ready to roll'];
+  const strip = [...items, ...items, ...items, ...items];
+  return (
+    <div className="overflow-hidden bg-amber py-3">
+      <div className="flex w-max animate-marquee whitespace-nowrap">
+        {strip.map((t, i) => (
+          <span key={i} className="mx-6 text-sm font-semibold uppercase tracking-[0.3em] text-charcoal">
+            {t} <span className="mx-6">&#9734;</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 async function FeaturedRamps() {
   const ramps = await getFeaturedRamps();
   return (
-    <section className="bg-navy-dark">
-      <div className="container-x py-20">
-        <div className="mb-10 flex items-end justify-between">
-          <h2 className="font-display text-3xl font-bold uppercase text-cream md:text-4xl">Popular Ramps</h2>
-          <Link href="/ramps" className="font-display text-sm uppercase tracking-wide text-gold hover:underline">View all</Link>
+    <section className="bg-charcoal-dark">
+      <div className="container-x py-24">
+        <div className="mb-12 flex items-end justify-between">
+          <div>
+            <p className="overline text-sm text-amber">Our Lineup</p>
+            <h2 className="mt-3 text-4xl font-semibold uppercase tracking-wide text-white">Popular Ramps</h2>
+          </div>
+          <Link href="/ramps" className="nav-link text-amber hover:underline">View all</Link>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ramps.map((r) => (
-            <Link key={r.id} href={`/ramps/${r.slug}`} className="group rounded-xl border border-white/10 bg-navy-light/30 p-6 transition hover:border-gold/60">
-              <div className="mb-5 aspect-square rounded-lg bg-gradient-to-tr from-navy-light to-navy" />
-              <h3 className="font-display text-lg uppercase tracking-wide text-cream group-hover:text-gold">{r.name}</h3>
-              <p className="mt-2 text-sm text-cream/60">{r.short_description}</p>
-              <p className="mt-4 text-xs uppercase tracking-wide text-cream/40">Up to {r.weight_capacity_lb} lb</p>
+            <Link
+              key={r.id}
+              href={`/ramps/${r.slug}`}
+              className="group overflow-hidden rounded-2xl border border-white/10 bg-charcoal-light transition hover:border-amber/60"
+            >
+              <div className="aspect-square bg-gradient-to-tr from-charcoal to-charcoal-light" />
+              <div className="p-6">
+                <h3 className="text-lg font-semibold uppercase tracking-wide text-white group-hover:text-amber">{r.name}</h3>
+                <p className="mt-2 text-sm text-white/55">{r.short_description}</p>
+                <p className="mt-4 text-xs uppercase tracking-[0.2em] text-white/40">Up to {r.weight_capacity_lb} lb</p>
+              </div>
             </Link>
           ))}
         </div>
@@ -88,6 +115,7 @@ export default function HomePage() {
     <>
       <Hero />
       <ValueProps />
+      <Marquee />
       <FeaturedRamps />
     </>
   );
