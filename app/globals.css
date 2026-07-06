@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0B1A2F;
+  --gold: #E0B04A;
+}
+
+body {
+  background-color: var(--navy);
+  color: #F7F3EA;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: 0.01em;
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-full bg-gold px-8 py-3 font-display font-semibold uppercase tracking-wide text-navy transition hover:bg-gold-light;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-gold px-8 py-3 font-display font-semibold uppercase tracking-wide text-gold transition hover:bg-gold hover:text-navy;
+  }
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-6;
+  }
+}
