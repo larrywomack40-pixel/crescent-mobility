@@ -13,13 +13,37 @@ async function getFeaturedRamps() {
   return data || [];
 }
 
-function Hero() {
+async function getMediaSlot(slot) {
+  const { data } = await supabase
+    .from('site_media')
+    .select('public_url, kind')
+    .eq('slot', slot)
+    .maybeSingle();
+  return data || null;
+}
+
+async function Hero() {
+  const heroVideo = await getMediaSlot('hero_video');
+  const heroImage = await getMediaSlot('hero_image');
+  const fallbackImg = heroImage?.public_url || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80';
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80)' }}
-      />
+      {heroVideo?.public_url ? (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={fallbackImg}
+          src={heroVideo.public_url}
+        />
+      ) : (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${fallbackImg})` }}
+        />
+      )}
       <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/30" />
       <div className="container-x relative z-10 pt-28">
         <div className="max-w-2xl">
