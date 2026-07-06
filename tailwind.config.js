@@ -7,21 +7,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: '#0B1A2F',
-          light: '#12263F',
-          dark: '#060F1C'
+        charcoal: {
+          DEFAULT: '#2B2B2B',
+          light: '#353535',
+          dark: '#202020'
         },
-        gold: {
-          DEFAULT: '#E0B04A',
-          light: '#F0C86B',
-          dark: '#B88A2E'
-        },
-        cream: '#F7F3EA'
+        amber: {
+          DEFAULT: '#F7B829',
+          light: '#FBC94D',
+          dark: '#D99E15'
+        }
       },
       fontFamily: {
-        display: ['Oswald', 'Arial Narrow', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif']
+        sans: ['Jost', 'system-ui', 'sans-serif'],
+        display: ['Jost', 'system-ui', 'sans-serif']
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        }
+      },
+      animation: {
+        marquee: 'marquee 20s linear infinite'
       }
     }
   },
